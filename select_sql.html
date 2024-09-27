@@ -46,23 +46,12 @@
     <script>
         const input = document.querySelector('#input');
         const output = document.querySelector('#output');
-        const funcs = [
-            'CONCAT',
-            'SUM',
-            'AVG',
-            'COUNT',
-            'MAX',
-            'MIN',
-            'GROUP_CONCAT'
-        ];
         input.addEventListener('input', function (e) {
             const sql = e.target.value;
             let result = sql.replace(/`/gi, '');
             result = result.split(',\n').map(item => {
-                for (let i = 0; i < funcs.length; i++) {
-                    if (item.includes(funcs[i])) {
-                        return `DB::raw('${item.trim()}'),`;
-                    }
+                if (/\(.*?\)/.test(item) || /[+\-*\/]/.test(item)) {
+                    return `DB::raw('${item.trim()}'),`;
                 }
                 return `'${item.trim()}',`;
             }).join('\n');
