@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chữ Di Chuyển và Sắp Xếp</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh; /* Chiếm toàn bộ chiều cao */
+            background-color: #f0f0f0; /* Màu nền */
+            font-family: Arial, sans-serif; /* Font chữ */
+            overflow: hidden; /* Ẩn thanh cuộn */
+        }
+        .letter {
+            display: inline-block;
+            font-size: 48px; /* Kích thước chữ */
+            transition: transform 0.5s; /* Hiệu ứng chuyển tiếp */
+        }
+    </style>
+</head>
+<body>
+
+<div id="container">
+    <div class="letter" id="letter1">t</div>
+    <div class="letter" id="letter2">n</div>
+    <div class="letter" id="letter3">.</div>
+    <div class="letter" id="letter4">o</div>
+    <div class="letter" id="letter5">r</div>
+    <div class="letter" id="letter6">g</div>
+</div>
+
+<script>
+    const letters = [
+        document.getElementById('letter1'),
+        document.getElementById('letter2'),
+        document.getElementById('letter3'),
+        document.getElementById('letter4'),
+        document.getElementById('letter5'),
+        document.getElementById('letter6')
+    ];
+    
+    const targetText = ['t', 'r', 'o', 'n', 'g']; // Văn bản đích
+    const dotElement = document.getElementById('letter3'); // Dấu chấm
+
+    function animateLetters() {
+        // Di chuyển dấu chấm lên vị trí để thay thế dấu nặng
+        dotElement.style.transform = 'translateY(-20px)'; // Di chuyển lên
+
+        // Thay đổi chữ cái sau 1 giây
+        setTimeout(() => {
+            // Cập nhật từng chữ cái
+            letters[0].textContent = targetText[0]; // 't'
+            letters[1].textContent = targetText[1]; // 'r'
+            letters[2].textContent = '.'; // Dấu nặng
+            letters[3].textContent = targetText[3]; // 'n'
+            letters[4].textContent = targetText[4]; // 'g'
+
+            // Di chuyển dấu chấm sang vị trí của dấu nặng
+            dotElement.style.transform = 'translate(20px, -20px)'; // Di chuyển sang phải và lên
+        }, 1000); // Thay đổi sau 1 giây
+    }
+
+    animateLetters(); // Bắt đầu hoạt động
+</script>
+
+</body>
+</html>
