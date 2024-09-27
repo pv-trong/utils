@@ -57,6 +57,7 @@
             }).join('\n');
             output.innerText = result;
         });
+
         document.querySelector('#copy').addEventListener('click', async function () {
             const copyMessage = document.querySelector('#copy-message');
             await navigator.clipboard.writeText(output.innerText.trim());
