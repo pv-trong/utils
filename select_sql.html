@@ -48,7 +48,11 @@
         const output = document.querySelector('#output');
         input.addEventListener('input', function (e) {
             const sql = e.target.value;
-            let result = sql.replace(/`/gi, '');
+            let result =
+                sql
+                    .replace(/`/gi, '')
+                    .replace(/^\,+|\,+$/g, '');
+
             result = result.split(',\n').map(item => {
                 if (/\(.*?\)/.test(item) || /[+\-*\/]/.test(item)) {
                     return `DB::raw('${item.trim()}'),`;
